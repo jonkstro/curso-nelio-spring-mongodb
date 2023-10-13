@@ -2,12 +2,16 @@ package com.udemy.workshopmongo.model;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 
-@Entity
+// Como é uma classe pro MongoDB, não será usado Entity, mas sim Document
+@Document(collection = "user")
 public class User implements Serializable {
 
+    @Id
     private String id;
     private String name;
     @Email
