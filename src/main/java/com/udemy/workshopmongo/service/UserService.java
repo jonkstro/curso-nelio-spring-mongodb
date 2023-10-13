@@ -24,7 +24,7 @@ public class UserService {
     public User findById(String id) {
         Optional<User> user = repository.findById(id);
         // Se não achar o user vai dar exceção personalizada
-        return user.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado"));
+        return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
     public User insert(User obj) {
@@ -37,6 +37,11 @@ public class UserService {
         repository.deleteById(id);
     }
 
+    // public User update(User obj, String id) {
+    // return null;        
+        
+    // }
+    
     public User fromDTO(UserDTO objDto) {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
