@@ -20,8 +20,10 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id) {
+    public User(String id, String name, @Email String email) {
         this.id = id;
+        this.name = name;
+        this.email = email;
     }
 
     public String getId() {

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.udemy.workshopmongo.dto.UserDTO;
 import com.udemy.workshopmongo.model.User;
 import com.udemy.workshopmongo.repository.UserRepository;
 import com.udemy.workshopmongo.service.exception.ObjectNotFoundException;
@@ -24,6 +25,14 @@ public class UserService {
         Optional<User> user = repository.findById(id);
         // Se não achar o user vai dar exceção personalizada
         return user.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj) {
+        return repository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
 }
