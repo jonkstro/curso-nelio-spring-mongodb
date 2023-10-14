@@ -37,11 +37,23 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    // public User update(User obj, String id) {
-    // return null;        
-        
-    // }
-    
+    public User update(User obj) {
+        User newObj = repository.findById(obj.getId()).orElse(null);
+        updateData(obj, newObj);
+        return repository.save(newObj);
+    }
+
+    private void updateData(User obj, User newObj) {
+        // Validar se não está sendo passado parâmetros nulos
+        // Vamos atualizar somente os valores preenchidos
+        if(obj.getName()!= null) {
+            newObj.setName(obj.getName());
+        }
+        if(obj.getEmail()!= null) {
+            newObj.setEmail(obj.getEmail());
+        }
+    }
+
     public User fromDTO(UserDTO objDto) {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
