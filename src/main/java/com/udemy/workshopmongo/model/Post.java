@@ -1,11 +1,14 @@
 package com.udemy.workshopmongo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.udemy.workshopmongo.dto.AuthorDTO;
+import com.udemy.workshopmongo.dto.CommentDTO;
 
 import jakarta.persistence.Id;
 
@@ -19,6 +22,9 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private AuthorDTO author;
+
+    // Lista de comentários, como é algo simples, pode ter só os CommentDTO 
+    private List<CommentDTO> comments = new ArrayList<>();
 
     public Post() {
     }
@@ -69,6 +75,19 @@ public class Post implements Serializable {
 
     public void setAuthor(AuthorDTO author) {
         this.author = author;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    // Como é um agregado (List) não terá Setter, ao invés disso, terá um add
+    // public void setComments(List<CommentDTO> comments) {
+    //     this.comments = comments;
+    // }
+
+    public void addComment(CommentDTO comment) {
+        comments.add(comment);
     }
 
     @Override
