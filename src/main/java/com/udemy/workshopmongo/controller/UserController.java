@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.udemy.workshopmongo.dto.UserDTO;
+import com.udemy.workshopmongo.model.Post;
 import com.udemy.workshopmongo.model.User;
 import com.udemy.workshopmongo.service.UserService;
 
@@ -65,6 +66,13 @@ public class UserController {
         user.setId(id);
         user = service.update(user);
         return ResponseEntity.ok().body(user);
+    }
+
+    // Endpoint para retornar os posts do usuário por id
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = service.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 
 }
