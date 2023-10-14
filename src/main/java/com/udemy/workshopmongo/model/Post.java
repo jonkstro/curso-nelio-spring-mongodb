@@ -1,7 +1,7 @@
 package com.udemy.workshopmongo.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
