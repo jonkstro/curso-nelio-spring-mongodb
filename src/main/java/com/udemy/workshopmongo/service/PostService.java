@@ -1,5 +1,6 @@
 package com.udemy.workshopmongo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class PostService {
 
     public List<Post> findByTitle(String text) {
         return repository.searchTitle(text);
+    }
+
+    public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
+        // Vai ser adicionado 24 horas, pois sempre o Date vem 0h, ao invés de 24h
+        maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+        return repository.fullSearch(text, minDate, maxDate);
     }
 
 }
