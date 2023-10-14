@@ -39,8 +39,7 @@ public class UserService {
 
     public User update(User obj) {
         // Vai buscar o ID primeiro, se não achar já lança exceção
-        findById(obj.getId());
-        User newObj = repository.findById(obj.getId()).orElse(null);
+        User newObj = findById(obj.getId());
         updateData(obj, newObj);
         return repository.save(newObj);
     }
