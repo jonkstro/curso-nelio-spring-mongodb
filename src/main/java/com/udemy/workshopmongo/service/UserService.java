@@ -22,9 +22,9 @@ public class UserService {
     }
 
     public User findById(String id) {
-        Optional<User> user = repository.findById(id);
+        User user = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
         // Se não achar o user vai dar exceção personalizada
-        return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+        return user;
     }
 
     public User insert(User obj) {
@@ -38,6 +38,8 @@ public class UserService {
     }
 
     public User update(User obj) {
+        // Vai buscar o ID primeiro, se não achar já lança exceção
+        findById(obj.getId());
         User newObj = repository.findById(obj.getId()).orElse(null);
         updateData(obj, newObj);
         return repository.save(newObj);
